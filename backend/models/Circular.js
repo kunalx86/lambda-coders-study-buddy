@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const circularSchema = new mongoose.Schema({
-  organization: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "organization"
-  },
   classes: [{
     type: mongoose.Schema.Types.ObjectId,
     required: true,

@@ -21,8 +21,13 @@ const scoreSchema = new mongoose.Schema({
   },
   exam: {
     type: String,
-    enum: ["Semester", "Mid Term", "Term Test", "Retest"],
+    enum: ["Semester", "Mid Term", "Term Test", "Retest", "MCQ"],
     required: true
+  },
+  test: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+    ref: "test"
   },
   occuredOn: {
     type: Date,
