@@ -1,9 +1,15 @@
 require("dotenv").config();
 const cors = require("cors");
-const studentRoutes = require("./routes/studentAuth")
-const teacherRoutes = require("./routes/teacherAuth")
-const organizationRoutes = require("./routes/organizationAuth")
+const studentAuthRoutes = require("./routes/studentAuth")
+const teacherAuthRoutes = require("./routes/teacherAuth")
+const organizationAuthRoutes = require("./routes/organizationAuth")
+const organizationRoutes = require("./routes/organization");
+const generalRoutes = require("./routes/general")
+const testRoutes = require("./routes/test")
+const communityRoutes = require("./routes/community")
 const mongoose = require("mongoose");
+
+
 
 const express = require("express");
 
@@ -29,9 +35,13 @@ app.use((req, res, next) => {
 
 
 // Routes
-app.use("/student", studentRoutes);
-app.use("/teacher", teacherRoutes);
+app.use("/student", studentAuthRoutes);
+app.use("/teacher", teacherAuthRoutes);
 app.use("/organization", organizationRoutes);
+app.use(organizationRoutes);
+app.use(generalRoutes);
+app.use(testRoutes);
+app.use(communityRoutes);
 
 
 
@@ -49,7 +59,7 @@ mongoose
   .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => {
     app.listen(PORT);
-    console.log("Server Started!");
+    console.log("Server Started! ", PORT);
   })
   .catch((err) => {
     console.log(err);

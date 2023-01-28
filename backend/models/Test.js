@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const testSchema = new mongoose.Schema({
   questions: [{
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "question"
+    question: String,
+    correctAnswer: String,
+    options: [String]
   }],
   class: {
     type: mongoose.Schema.Types.ObjectId,
@@ -14,7 +14,17 @@ const testSchema = new mongoose.Schema({
   occuredOn: {
     type: Date,
     required: true
-  }
+  },
+  type: {
+    type: String,
+    enum: ["Academic", "Emotional"]
+  },
+  subject: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: false,
+    ref: "subject"
+  },
 }, { timestamps: true });
 
-export const Test = mongoose.model("test", testSchema);
+const Test = mongoose.model("test", testSchema);
+module.exports = Test;

@@ -59,6 +59,16 @@ exports.createClass = (req, res) => {
 
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
+        var subjectId = [];
+        Subject.find({ name: { $in: subjects } }).then((_subjects) => {
+            subjectId = _subjects.map((sub) => sub._id);
+        })
+
+        var teacherId;
+        Teacher.find({ email: classTeacher }).then((_teacher) => {
+            teacherId = _teacher._id;
+        })
+
         var flag = true;
         let code = ' ';
 
@@ -79,11 +89,16 @@ exports.createClass = (req, res) => {
         const NewClass = new Class({
             grade,
             name,
-            classTeacher,
-            subjects,
+            classTeacher: teacherId,
+            subjects: subjectId,
             joiningCode: code
         })
         NewClass.save();
+        return res.status(203).json({
+            message: "class Created",
+            data: NewClass
+        })
+
 
     } catch (err) {
         (err) => {
@@ -98,7 +113,7 @@ exports.createClass = (req, res) => {
 // class teacher by class grade
 exports.getClassTeacher = (req, res) => {
     try {
-        const { grade } = req.body;
+        const { grade } = req.param;
         Class.findOne({ grade }).then((_class) => {
             if (_class) {
                 const teacherId = _class.classTeacher;
@@ -119,8 +134,13 @@ exports.getClassTeacher = (req, res) => {
                 res.status(422).json({ message: error.data });
             }
         })
-    } catch (error) {
-
+    } catch (err) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
     }
 }
 
@@ -129,17 +149,126 @@ exports.getClassTeacher = (req, res) => {
 
 exports.getTeachersBySubject = (req, res) => {
     try {
-        const { subject } = req.body;
+        const { subject } = req.param;
         Teaches.findOne({ name: subject }).then((_subject) => {
             Teacher.find({ subjects: _subject._id }).then((_teachers) => {
                 if (_teachers) {
+                    return res.status(203).json({
+                        message: `All teacher with ${subject} subject`,
+                        data: _teachers
+                    })
+                } else {
+                    return res.status(203).json({
+                        message: `There are no teachers with ${subject} subject`,
+                        data: []
+                    })
+                }
+            })
+        })
 
+    } catch (err) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
+    }
+}
+
+exports.getTeachersByClass = (req, res) => {
+
+    try {
+        const { grade } = req.param;
+        Class.findOne({ grade }).then((_class) => {
+            Teaches.find({ class: _class._id }).then((_teachers) => {
+                if (_teachers) {
+                    return res.status(203).json({
+                        message: `All teacher with ${grade} class`,
+                        data: _teachers
+                    })
+                } else {
+                    return res.status(203).json({
+                        message: `There are no teachers with class`,
+                        data: []
+                    })
+                }
+            })
+        })
+
+    } catch (err) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
+
+    }
+
+}
+
+exports.getSubjectsByClass = (req, res) => {
+    try {
+        const { grade } = req.body;
+        Class.findOne({ grade }).then((_class) => {
+            const subjects = _class.subjects;
+            Subject.find({ _id: subjects }).then((_subjects) => {
+                if (_subjects) {
+                    return res.status(203).json({
+                        message: `All subject with ${grade} class`,
+                        data: _subjects
+                    })
+                } else {
+                    return res.status(203).json({
+                        message: `There are no teachers with class`,
+                        data: []
+                    })
                 }
             })
         })
 
     } catch (error) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
+    }
+}
 
+exports.getAllTeachers = (req, res) => {
+    try {
+        Teacher.find().then((_teachers) => {
+            return res.status(203).json({
+                data: _teachers
+            })
+        })
+    } catch (error) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
+    }
+}
+
+exports.getAllClass = (req, res) => {
+    try {
+        Class.find().then((_classes) => {
+            return res.status(203).json({
+                data: _classes
+            })
+        })
+    } catch (error) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
     }
 }
 

@@ -13,10 +13,6 @@ const teacherSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  resetVerified: {
-    type: Boolean,
-    required: false
-  },
 }, { timestamps: true });
 
 const Teacher = mongoose.model("teacher", teacherSchema);
