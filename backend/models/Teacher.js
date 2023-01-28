@@ -13,11 +13,6 @@ const teacherSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  organization: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "organization"
-  },
   resetVerified: {
     type: Boolean,
     required: false

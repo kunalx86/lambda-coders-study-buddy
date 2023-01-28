@@ -13,11 +13,6 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  organization: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "organization"
-  },
   class: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -32,6 +27,10 @@ const studentSchema = new mongoose.Schema({
     type: Boolean,
     required: false
   },
+  interests: [{
+    type: String,
+    required: true
+  }]
 }, { timestamps: true });
 
 export const Student = mongoose.model("student", studentSchema);
