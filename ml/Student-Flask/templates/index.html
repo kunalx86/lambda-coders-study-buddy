@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Scores ML</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href='static/css/a.css'>
+</head>
+
+<body>
+ <div class="login">
+	<h1>Enter Scores</h1>
+    <form action="{{ url_for('predict')}}"method="post">
+      <input type="text" placeholder="Roll No" required="required" />
+    	<input type="text" name="math" placeholder="Math Score" required="required" />
+      <input type="text" name="english" placeholder="Engish Score" required="required" />
+		  <input type="text" name="science" placeholder="Science Score" required="required" />
+      <input type="text" name="history" placeholder="History Score" required="required" />
+      <input type="text" name="geo" placeholder="Geography Score" required="required" />
+      <!-- <div class="radio-group">
+        Gender:
+        <label id="male" for="male"><input id="male" type="radio" name="gender" value="0" class="input-radio-rating">
+          Male</label>
+        <label id="female" for="female"><input id="female" type="radio" name="gender" value="1" class="input-radio-rating">
+          Female</label>
+      </div>
+
+      <input type="text" name="race" placeholder="race" required="required" />
+      <input type="text" name="parental_edu" placeholder="parental education" required="required" />
+      <input type="text" name="lunch" placeholder="lunch standard" required="required" /> -->
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+   <!-- {% for i in int_features: %}
+    ,{{ i }}
+   {% endfor %} -->
+ </div>
+</body>
+</html>
