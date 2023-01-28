@@ -276,8 +276,8 @@ exports.getAllClass = (req, res) => {
 
 exports.getStudentsByClass = (req , res) => {
     try {
-        const {name} =req.body;
-        Class.findOne({name}).then((_class) => {
+        const { grade } =req.params;
+        Class.findOne({grade}).then((_class) => {
             var code = _class.joiningCode;
             Student.find({code}).then((_students) =>{
                 return res.status(203).json({

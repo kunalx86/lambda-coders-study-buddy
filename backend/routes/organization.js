@@ -11,6 +11,6 @@ router.get("/getTeachersBySubject/:subject", Auth.authentication, organizationCo
 router.get("/getTeachersByClass/:grade", Auth.authentication, organizationController.getTeachersByClass);
 router.get("/getAllTeachers", Auth.authentication, organizationController.getAllTeachers);
 router.get("/getAllClass", Auth.authentication, organizationController.getAllClass);
-router.get("/getStudentsByClass",Auth.authentication, organizationController.getStudentsByClass);
+router.get("/getStudentsByClass/:grade",Auth.authentication, organizationController.getStudentsByClass);
 
 module.exports = router;
