@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "assets/css/App.css";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
 import RTLLayout from "layouts/rtl";
@@ -10,20 +10,21 @@ import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import IndexPage from "views";
 import { AuthProvider } from "contexts/AuthContext";
+import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>
     <React.StrictMode>
       <AuthProvider>
         <ThemeEditorProvider>
-          <HashRouter>
+          <BrowserRouter>
             <Switch>
               <Route path={`/auth`} component={AuthLayout} />
               <Route path={`/admin`} component={AdminLayout} />
               <Route path={`/rtl`} component={RTLLayout} />
-              <Route path={`/`} component={IndexPage} />
+              <Route exact path={`/`} component={IndexPage} />
             </Switch>
-          </HashRouter>
+          </BrowserRouter>
         </ThemeEditorProvider>
       </AuthProvider>
     </React.StrictMode>

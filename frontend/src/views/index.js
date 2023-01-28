@@ -2,19 +2,12 @@ import { Container, Heading, Text, useColorMode } from "@chakra-ui/react";
 import HomeLayout from "../layouts/home";
 import {
   Box,
-  Flex,
   Stack,
-  Input,
-  Button,
   SimpleGrid,
-  Avatar,
-  AvatarGroup,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import SignIn from "./auth/signIn";
 
 function JoinOurTeam() {
-  const size = useBreakpointValue({ base: "md", md: "lg" });
   const { colorMode } = useColorMode();
   return (
     <Box position={"relative"}>
