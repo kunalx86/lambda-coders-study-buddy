@@ -16,4 +16,5 @@ const circularSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export const Circular = mongoose.model("circular", circularSchema);
+const Circular = mongoose.model("circular", circularSchema);
+module.exports = { Circular };

@@ -26,4 +26,5 @@ const classSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
-export const Class = mongoose.model("class", classSchema);
+const Class = mongoose.model("class", classSchema);
+module.exports = { Class };

@@ -22,4 +22,5 @@ const studentDataSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
-export const StudentData = mongoose.model("studentdata", studentDataSchema);
+const StudentData = mongoose.model("studentdata", studentDataSchema);
+module.exports = { StudentData };

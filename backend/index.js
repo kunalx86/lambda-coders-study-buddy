@@ -1,6 +1,8 @@
 require("dotenv").config();
 const cors = require("cors");
-
+const studentRoutes = require("./routes/studentAuth")
+const teacherRoutes = require("./routes/teacherAuth")
+const organizationRoutes = require("./routes/organizationAuth")
 const mongoose = require("mongoose");
 
 const express = require("express");
@@ -23,6 +25,15 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Headers", "*"); // allowed headers (Auth for extra data related to authoriaztiom)
   next();
 });
+
+
+
+// Routes
+app.use("/student", studentRoutes);
+app.use("/teacher", teacherRoutes);
+app.use("/organization", organizationRoutes);
+
+
 
 const PORT = process.env.PORT || 5000;
 mongoose

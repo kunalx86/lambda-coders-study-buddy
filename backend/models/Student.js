@@ -9,6 +9,14 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  rollno: {
+    type: String,
+    required: true
+  },
+  gender: {
+    type: String,
+    required: true
+  },
   password: {
     type: String,
     required: true
@@ -33,4 +41,5 @@ const studentSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
-export const Student = mongoose.model("student", studentSchema);
+const Student = mongoose.model("student", studentSchema);
+module.exports = { Student };
