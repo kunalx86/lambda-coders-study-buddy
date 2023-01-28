@@ -1,9 +1,14 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
+from flask_cors import CORS
 import pickle
+import pandas as pd
+import math
+import json
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
+CORS(app, origins="*", supports_credentials=False)
 
 @app.route('/')
 def home():
@@ -34,5 +39,38 @@ def predict_api():
     output = prediction[0]
     return jsonify(output)
 
+@app.route('/csv', methods=["POST"])
+def upload_predict():
+  file = request.files["file"]
+  file.save(f"{file.filename}.csv")
+  data = pd.read_csv(f"{file.filename}.csv") 
+  data_ = data
+  drop_list = ['roll no', 'name', 'standard', 'gender', 'race/ethnicity',
+       'parental level of education', 'lunch', 'test preparation course',
+       'math', 'english', 'geography', 'history', 'science', 'total',
+       'percentag', 'attended', 'total lectures', 'test marks',
+       'total marks', 'score-cat', 'study-cat',
+       'Unnamed: 24']
+  data = data.drop(drop_list,axis=1)
+  from sklearn.model_selection import train_test_split
+  x=data.drop(['cluster'], axis=1, inplace=False)
+  y=data["cluster"]
+  x=pd.get_dummies(x, drop_first=True)
+  x_train,x_test,y_train,y_test = train_test_split(x, y, test_size=0.33, random_state=101)
+  from sklearn.linear_model import LinearRegression
+  cluster_model = LinearRegression()
+  cluster_model = cluster_model.fit(x_train, y_train)
+  data.drop(['cluster'], axis=1, inplace=True)
+  data_ = list(data_[["roll no"]].iterrows())
+  # output = list(map(lambda x: 4 if x not in [1, 2, 3] else x, map(lambda x: math.ceil(cluster_model.predict(x)), data.iterrows())))
+  output = zip(data_, list(map(lambda x: 4 if x not in [1, 2, 3] else x, map(math.ceil, cluster_model.predict(data)))))
+  ret = []
+  for x, y in output:
+    ret.append({
+      "roll": x[0],
+      "cluster": y
+    })
+  return jsonify(ret)
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5600)
