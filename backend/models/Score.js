@@ -30,4 +30,5 @@ const scoreSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export const Score = mongoose.model("score", scoreSchema);
+const Score = mongoose.model("score", scoreSchema);
+module.exports = { Score };
