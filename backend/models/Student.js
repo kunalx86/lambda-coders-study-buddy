@@ -38,7 +38,12 @@ const studentSchema = new mongoose.Schema({
   interests: [{
     type: String,
     required: true
-  }]
+  }],
+  code: {
+    type:String,
+    required: true
+  }
+
 }, { timestamps: true });
 
 const Student = mongoose.model("student", studentSchema);
