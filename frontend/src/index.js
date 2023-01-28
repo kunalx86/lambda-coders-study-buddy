@@ -4,6 +4,7 @@ import "assets/css/App.css";
 import { Route, Switch } from "react-router-dom";
 import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
+import TeacherLayout from "layouts/teacher";
 import RTLLayout from "layouts/rtl";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
@@ -21,6 +22,7 @@ ReactDOM.render(
             <Switch>
               <Route path={`/auth`} component={AuthLayout} />
               <Route path={`/admin`} component={AdminLayout} />
+              <Route path={`/teacher`} component={TeacherLayout} />
               <Route path={`/rtl`} component={RTLLayout} />
               <Route exact path={`/`} component={IndexPage} />
             </Switch>
