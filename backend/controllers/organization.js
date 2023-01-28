@@ -2,6 +2,7 @@ const { Teacher } = require("../models/Teacher");
 const { Class } = require("../models/Class");
 const { Teaches } = require("../models/Teaches");
 const { Subject } = require("../models/Subject");
+const {Student} = require("../models/Student");
 const bcrypt = require("bcryptjs");
 
 
@@ -10,7 +11,7 @@ exports.createTeacher = (req, res) => {
     try {
         const name = req.body.name;
         const email = req.body.email;
-
+        
         Teacher.findOne({ email: email }).then((_teacher) => {
             if (!_teacher) {
                 bcrypt
@@ -272,3 +273,26 @@ exports.getAllClass = (req, res) => {
     }
 }
 
+
+exports.getStudentsByClass = (req , res) => {
+    try {
+        const { grade } =req.params;
+        Class.findOne({grade}).then((_class) => {
+            var code = _class.joiningCode;
+            Student.find({code}).then((_students) =>{
+                return res.status(203).json({
+                    data: _students
+                })
+            })
+        })
+        
+    } catch (err) {
+        (err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        };
+        
+    }
+}   

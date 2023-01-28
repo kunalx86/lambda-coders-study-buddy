@@ -51,7 +51,8 @@ exports.signup = (req, res) => {
                                 isverified: false,
                                 name: name,
                                 resetVerified: false,
-                                class: _class._id
+                                class: _class._id,
+                                code
 
                             });
                             Newuser.save();
