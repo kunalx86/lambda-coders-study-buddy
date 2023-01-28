@@ -295,7 +295,7 @@ exports.login = (req, res, next) => {
                 .then((matchPass) => {
                     if (matchPass) {
                         const access_token = jwt.sign(
-                            { email: email },
+                            { email: email, type: "teacher", id: user._id },
                             api_key.accessToken,
                             {
                                 algorithm: "HS256",
@@ -303,19 +303,10 @@ exports.login = (req, res, next) => {
                             }
                         );
 
-                        const referesh_token = jwt.sign(
-                            { email: email },
-                            api_key.refereshToken,
-                            {
-                                algorithm: "HS256",
-                                expiresIn: api_key.refereshTokenLife,
-                            }
-                        );
 
                         return res.status(201).json({
                             message: "User logged in!",
                             access_token: access_token,
-                            referesh_token: referesh_token,
                             username: user.name,
                             userId: user._id,
                         });

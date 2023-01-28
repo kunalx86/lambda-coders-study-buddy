@@ -306,7 +306,7 @@ exports.login = (req, res, next) => {
                 .then((matchPass) => {
                     if (matchPass) {
                         const access_token = jwt.sign(
-                            { email: email },
+                            { email: email, type: "student", id: user._id },
                             api_key.accessToken,
                             {
                                 algorithm: "HS256",

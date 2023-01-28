@@ -7,7 +7,7 @@ exports.login = (req, res) => {
     if (email === process.env.ADMIN_EMAIL) {
         if (password === process.env.ADMIN_PASS) {
             const access_token = jwt.sign(
-                { email: email },
+                { email: email, type: "admin" },
                 api_key.accessToken,
                 {
                     algorithm: "HS256",
