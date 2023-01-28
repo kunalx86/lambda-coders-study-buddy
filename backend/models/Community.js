@@ -15,10 +15,11 @@ const communitySchema = new mongoose.Schema({
     required: true,
     ref: "student"
   }],
-  tags: [{
+  tag: {
     type: String,
     required: true
-  }]
+  }
 }, { timestamps: true });
 
-export const Community = mongoose.model("community", communitySchema);
+const Community = mongoose.model("community", communitySchema);
+module.exports = { Community };
