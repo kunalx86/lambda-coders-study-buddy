@@ -11,6 +11,7 @@ import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import IndexPage from "views";
 import { AuthProvider } from "contexts/AuthContext";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import TestPage from "views/student/Tests/TestPage";
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>
@@ -23,6 +24,7 @@ ReactDOM.render(
               <Route path={`/admin`} component={AdminLayout} />
               <Route path={`/rtl`} component={RTLLayout} />
               <Route exact path={`/`} component={IndexPage} />
+              <Route exact path={`/student/test`} component={TestPage} />
             </Switch>
           </BrowserRouter>
         </ThemeEditorProvider>
