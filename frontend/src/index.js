@@ -18,6 +18,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import WeeklyTest from "views/student/Tests/WeeklyTest";
 import AptitudeTest from "views/student/Tests/AptitudeTest";
+import Community from "views/student/Community";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,7 @@ ReactDOM.render(
                 <Route exact path={`/student/aptitudetest`} component={TestPage2} />
                 <Route exact path={"/student/test1"} component={WeeklyTest} />
                 <Route exact path={`/student/test2`} component={AptitudeTest} />
+                <Route exact path={'/student/community'} component={Community} />
               </Switch>
             </BrowserRouter>
           </ThemeEditorProvider>

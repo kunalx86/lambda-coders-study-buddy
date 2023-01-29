@@ -55,20 +55,20 @@ exports.createClass = (req, res) => {
     try {
         const { grade } = req.body;
         const { name } = req.body;
-        const { classTeacher } = req.body;
-        const { subjects } = req.body;
+        // const { classTeacher } = req.body;
+        // const { subjects } = req.body;
 
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
         var subjectId = [];
-        Subject.find({ name: { $in: subjects } }).then((_subjects) => {
-            subjectId = _subjects.map((sub) => sub._id);
-        })
+        // Subject.find({ name: { $in: subjects } }).then((_subjects) => {
+        //     subjectId = _subjects.map((sub) => sub._id);
+        // })
 
-        var teacherId;
-        Teacher.find({ email: classTeacher }).then((_teacher) => {
-            teacherId = _teacher._id;
-        })
+        // var teacherId;
+        // Teacher.find({ email: classTeacher }).then((_teacher) => {
+        //     teacherId = _teacher._id;
+        // })
 
         var flag = true;
         let code = ' ';
@@ -90,8 +90,6 @@ exports.createClass = (req, res) => {
         const NewClass = new Class({
             grade,
             name,
-            classTeacher: teacherId,
-            subjects: subjectId,
             joiningCode: code
         })
         NewClass.save();

@@ -1,4 +1,4 @@
-const { axiosNode } = require("axios");
+import { axiosNode } from "../axios";
 
 class AuthAPIService {
   teacherLogin({ email, password }) {

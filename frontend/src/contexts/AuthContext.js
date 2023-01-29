@@ -1,6 +1,6 @@
-import { Spinner } from "@chakra-ui/react";
 import { authService } from "apiServices/auth";
 import { createContext, useCallback, useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export const AuthContext = createContext({
   type: null,
@@ -16,11 +16,13 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [access_token, setAccessToken] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const history = useHistory();
 
   const login = async (creds) => {
     setIsLoading(true);
-    const res = authService.login(creds);
-    getDetails(res.access_token);
+    const res = await authService.login(creds);
+    getDetails(res.data.access_token);
+    history.push(`/${res.data.type}`)
   };
 
   const logout = async () => {
