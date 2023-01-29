@@ -58,18 +58,30 @@ def upload_predict():
   x=pd.get_dummies(x, drop_first=True)
   x_train,x_test,y_train,y_test = train_test_split(x, y, test_size=0.33, random_state=101)
   from sklearn.linear_model import LinearRegression
-  cluster_model = LinearRegression()
-  cluster_model = cluster_model.fit(x_train, y_train)
+  from sklearn.ensemble import RandomForestClassifier
+  rf = RandomForestClassifier(n_estimators=10, criterion='entropy', random_state=0)
+  rf = rf.fit(x_train,y_train)
+  predictions = rf.predict(x_test)
   data.drop(['cluster'], axis=1, inplace=True)
   data_ = list(data_[["roll no"]].iterrows())
   # output = list(map(lambda x: 4 if x not in [1, 2, 3] else x, map(lambda x: math.ceil(cluster_model.predict(x)), data.iterrows())))
-  output = zip(data_, list(map(lambda x: 4 if x not in [1, 2, 3] else x, map(math.ceil, cluster_model.predict(data)))))
+  output = zip(data_, list(map(lambda x: 4 if x not in [1, 2, 3] else x, map(math.ceil, rf.predict(data)))))
   ret = []
   for x, y in output:
     ret.append({
       "roll": x[0],
-      "cluster": y
+      "cluster": y,
+      "weak-subject": ""
     })
+  
+  for entry in output:
+    if entry["cluster"] in [2, 3]:
+      df = entry[['math', 'english', 'geography', 'history', 'science']]
+      for val in df:
+        if((df[val][4]-(abs(df[val].mean())))>25):
+          entry["weak-subject"] = val
+          print(val)
+  
   return jsonify(ret)
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ import AuthLayout from "layouts/auth";
 import AdminLayout from "layouts/admin";
 import TeacherLayout from "layouts/teacher";
 import RTLLayout from "layouts/rtl";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Box, Heading, Text } from "@chakra-ui/react";
 import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import IndexPage from "views";
@@ -21,6 +21,19 @@ import AptitudeTest from "views/student/Tests/AptitudeTest";
 import Community from "views/student/Community";
 
 const queryClient = new QueryClient();
+
+const AptitudeResult = () => {
+  const video = <iframe width="560" height="315" src="https://www.youtube.com/embed/4e6KSaCxcHs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>;
+
+  return (
+    <Box>
+      <Heading>
+        <Text>We hope that the Aptitude Test help you in making a choice for your career!</Text>
+      </Heading>
+      {video}
+    </Box>
+  )
+}
 
 ReactDOM.render(
   <ChakraProvider theme={theme}>
@@ -37,6 +50,7 @@ ReactDOM.render(
                 <Route exact path={`/`} component={IndexPage} />
                 <Route exact path={`/student/weeklytest`} component={TestPage1} />
                 <Route exact path={`/student/aptitudetest`} component={TestPage2} />
+                <Route exact path={`/student/aptituderesult`} component={AptitudeResult} />
                 <Route exact path={"/student/test1"} component={WeeklyTest} />
                 <Route exact path={`/student/test2`} component={AptitudeTest} />
                 <Route exact path={'/student/community'} component={Community} />

@@ -5,7 +5,7 @@ const AptitudeTest = () => {
     return (
         <div>
             <Quiz quiz={test} showDefaultResult={false} onComplete={() => {
-                window.open("/student/aptitudetest", "_self");
+                window.open("/student/aptituderesult", "_self");
             }} />
         </div>
     )
