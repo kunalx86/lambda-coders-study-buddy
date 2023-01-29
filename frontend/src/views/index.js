@@ -72,7 +72,14 @@ function JoinOurTeam() {
         <Heading>
           <Text textAlign={"center"}>Navigation Links</Text>
         </Heading>
-        <HStack ml={"35%"} mb={2} alignSelf={"center"} alignItems={"center"} spacing={8} mt={2}>
+        <HStack
+          ml={"35%"}
+          mb={2}
+          alignSelf={"center"}
+          alignItems={"center"}
+          spacing={8}
+          mt={2}
+        >
           <Box
             bg={"navy.600"}
             p={3}
@@ -93,6 +100,56 @@ function JoinOurTeam() {
           >
             <Heading fontSize={"md"}>
               <Text>Go to Admin's Dashboard</Text>
+            </Heading>
+          </Box>
+        </HStack>
+      </Box>
+      <Box alignSelf={"center"} justifySelf={"center"}>
+        <Heading>
+          <Text textAlign={"center"}>Test Links</Text>
+        </Heading>
+        <HStack
+          ml={"25%"}
+          mb={2}
+          alignSelf={"center"}
+          alignItems={"center"}
+          spacing={8}
+          mt={2}
+        >
+          <Box
+            bg={"navy.600"}
+            p={3}
+            w={"210px"}
+            h={"120px"}
+            borderRadius={"md"}
+            onClick={() => history.push("/student/weeklytest")}
+          >
+            <Heading fontSize={"md"}>
+              <Text textAlign={"center"}>Weekly Test</Text>
+            </Heading>
+          </Box>
+          <Box
+            bg={"navy.600"}
+            p={3}
+            w={"210px"}
+            h={"120px"}
+            borderRadius={"md"}
+            onClick={() => history.push("/student/aptitudetest")}
+          >
+            <Heading fontSize={"md"}>
+              <Text textAlign={"center"}>Aptitude Test</Text>
+            </Heading>
+          </Box>
+          <Box
+            bg={"navy.600"}
+            p={3}
+            w={"210px"}
+            h={"120px"}
+            borderRadius={"md"}
+            onClick={() => history.push("/student/community")}
+          >
+            <Heading fontSize={"md"}>
+              <Text textAlign={"center"}>Student Community</Text>
             </Heading>
           </Box>
         </HStack>
