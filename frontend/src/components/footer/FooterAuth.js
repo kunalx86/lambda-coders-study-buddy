@@ -37,14 +37,6 @@ export default function Footer() {
         &copy; {1900 + new Date().getYear()}
         <Text as='span' fontWeight='500' ms='4px'>
           Study Buddy. Made with 💖 by Lambda Coders
-          <Link
-            mx='3px'
-            color={textColor}
-            href='https://www.simmmple.com'
-            target='_blank'
-            fontWeight='700'>
-            Simmmple!
-          </Link>
         </Text>
       </Text>
       <List display='flex'>

@@ -12,6 +12,7 @@ import {
   MdMoney,
   MdFeedback,
   MdSports,
+  MdAttachment,
 } from "react-icons/md";
 
 // Admin Imports
@@ -24,6 +25,8 @@ import TeacherClass from "views/teacher/class";
 import PredictionView from "views/teacher/prediction";
 import MarksView from "views/teacher/marks";
 import ScholarshipView from "views/teacher/scholarship";
+import GraphView from "views/teacher/graph";
+import AttendancePage from "views/teacher/attendance";
 // Auth Imports
 import IndexPage from "views";
 import { HomeIcon } from "components/icons/Icons";
@@ -107,7 +110,16 @@ const routes = [
     icon: (
       <Icon as={MdStackedBarChart} width="20px" height="20px" color="inherit" />
     ),
-    component: Profile,
+    component: GraphView,
+  },
+  {
+    name: "Attendance",
+    layout: "/teacher",
+    path: "/attendance",
+    icon: (
+      <Icon as={MdAttachment} width="20px" height="20px" color="inherit" />
+    ),
+    component: AttendancePage,
   },
   {
     name: "Student Schedule",
