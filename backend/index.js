@@ -38,7 +38,7 @@ app.use((req, res, next) => {
 app.use("/student", studentAuthRoutes);
 app.use("/teacher", teacherAuthRoutes);
 app.use("/organization", organizationRoutes);
-app.use(organizationRoutes);
+app.use(organizationAuthRoutes);
 app.use(generalRoutes);
 app.use(testRoutes);
 app.use(communityRoutes);
