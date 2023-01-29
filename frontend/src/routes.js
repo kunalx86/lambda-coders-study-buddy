@@ -71,6 +71,20 @@ const routes = [
     path: "/graphs",
     icon: <Icon as={MdStackedBarChart} width="20px" height="20px" color="inherit" />,
     component: Profile,
+  },
+  {
+    name: "Student Schedule",
+    layout: "/student",
+    path: "/schedule",
+    icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
+    component: Profile
+  },
+  {
+    name: "Student Schedule",
+    layout: "/student",
+    path: "/schedule",
+    icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
+    component: Profile
   }
 ];
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Box,
@@ -12,6 +12,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Select,
   Spinner,
   Text,
 } from "@chakra-ui/react";
@@ -22,6 +23,7 @@ import illustration from "assets/img/auth/auth.png";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { useAuth } from "hooks/auth";
+import { authService } from "apiServices/auth";
 
 function SignIn() {
   // Chakra color mode
@@ -32,6 +34,9 @@ function SignIn() {
   // const brandStars = useColorModeValue("brand.500", "brand.400");
   const brandStars = "brand.500";
   const { login, isLoading } = useAuth();
+  const [loginMode, setLoginMode] = useState("organization");
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -91,6 +96,7 @@ function SignIn() {
               variant="auth"
               fontSize="sm"
               ms={{ base: "0px", md: "0px" }}
+              ref={emailRef}
               type="email"
               placeholder="mail@simmmple.com"
               color={"navy.700"}
@@ -110,6 +116,7 @@ function SignIn() {
             <InputGroup size="md">
               <Input
                 isRequired={true}
+                ref={passwordRef}
                 fontSize="sm"
                 placeholder="Min. 8 characters"
                 mb="24px"
@@ -156,7 +163,19 @@ function SignIn() {
               </NavLink>
             </Flex>
             <Button
-              onClick={login}
+              onClick={async () => {
+                if (loginMode === "organization") {
+                  await authService.organizationLogin({
+                    email: emailRef.current,
+                    password: passwordRef.current,
+                  });
+                } else if (loginMode === "teacher") {
+                  await authService.teacherLogin({
+                    email: emailRef.current,
+                    password: passwordRef.current,
+                  });
+                }
+              }}
               disabled={isLoading}
               fontSize="sm"
               variant="brand"

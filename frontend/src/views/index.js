@@ -1,14 +1,18 @@
-import { Container, Heading, Text, useColorMode } from "@chakra-ui/react";
-import HomeLayout from "../layouts/home";
 import {
-  Box,
-  Stack,
-  SimpleGrid,
+  Container,
+  Heading,
+  HStack,
+  Text,
+  useColorMode,
 } from "@chakra-ui/react";
+import HomeLayout from "../layouts/home";
+import { useHistory } from "react-router-dom";
+import { Box, Stack, SimpleGrid } from "@chakra-ui/react";
 import SignIn from "./auth/signIn";
 
 function JoinOurTeam() {
   const { colorMode } = useColorMode();
+  const history = useHistory();
   return (
     <Box position={"relative"}>
       <Container
@@ -57,61 +61,42 @@ function JoinOurTeam() {
               </Text>
             </Heading>
             <Text color={"gray.500"} fontSize={{ base: "sm", sm: "md" }}>
-              Joining under your organization gives you the power to manage
-              all your problems under one screen!
+              Joining under your organization gives you the power to manage all
+              your problems under one screen!
             </Text>
           </Stack>
-          {/* <Box as={"form"} mt={10}>
-            <Stack spacing={4}>
-              <Input
-                placeholder="Firstname"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
-                }}
-              />
-              <Input
-                placeholder="firstname@lastname.io"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
-                }}
-              />
-              <Input
-                placeholder="+1 (___) __-___-___"
-                bg={"gray.100"}
-                border={0}
-                color={"gray.500"}
-                _placeholder={{
-                  color: "gray.500",
-                }}
-              />
-              <Button fontFamily={"heading"} bg={"gray.200"} color={"gray.800"}>
-                Upload CV
-              </Button>
-            </Stack>
-            <Button
-              fontFamily={"heading"}
-              mt={8}
-              w={"full"}
-              bgGradient="linear(to-r, red.400,pink.400)"
-              color={"white"}
-              _hover={{
-                bgGradient: "linear(to-r, red.400,pink.400)",
-                boxShadow: "xl",
-              }}
-            >
-              Submit
-            </Button>
-          </Box> */}
           <SignIn />
-          form
         </Stack>
       </Container>
+      <Box alignSelf={"center"} justifySelf={"center"}>
+        <Heading>
+          <Text textAlign={"center"}>Navigation Links</Text>
+        </Heading>
+        <HStack ml={"35%"} mb={2} alignSelf={"center"} alignItems={"center"} spacing={8} mt={2}>
+          <Box
+            bg={"navy.600"}
+            p={3}
+            h={"120px"}
+            borderRadius={"md"}
+            onClick={() => history.push("/teacher")}
+          >
+            <Heading fontSize={"md"}>
+              <Text textAlign={"center"}>Go to Teacher's Dashboard</Text>
+            </Heading>
+          </Box>
+          <Box
+            bg={"navy.600"}
+            p={3}
+            h={"120px"}
+            borderRadius={"md"}
+            onClick={() => history.push("/admin")}
+          >
+            <Heading fontSize={"md"}>
+              <Text>Go to Admin's Dashboard</Text>
+            </Heading>
+          </Box>
+        </HStack>
+      </Box>
     </Box>
   );
 }
