@@ -12,9 +12,12 @@ import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import IndexPage from "views";
 import { AuthProvider } from "contexts/AuthContext";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
-import TestPage from "views/student/Tests/TestPage";
+import TestPage1 from "views/student/Tests/TestPage1";
+import TestPage2 from "views/student/Tests/TestPage2";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import WeeklyTest from "views/student/Tests/WeeklyTest";
+import AptitudeTest from "views/student/Tests/AptitudeTest";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,10 @@ ReactDOM.render(
                 <Route path={`/teacher`} component={TeacherLayout} />
                 <Route path={`/rtl`} component={RTLLayout} />
                 <Route exact path={`/`} component={IndexPage} />
+                <Route exact path={`/student/weeklytest`} component={TestPage1} />
+                <Route exact path={`/student/aptitudetest`} component={TestPage2} />
+                <Route exact path={"/student/test1"} component={WeeklyTest} />
+                <Route exact path={`/student/test2`} component={AptitudeTest} />
               </Switch>
             </BrowserRouter>
           </ThemeEditorProvider>
