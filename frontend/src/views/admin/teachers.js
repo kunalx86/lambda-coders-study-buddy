@@ -1,4 +1,4 @@
-import { Textarea, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
+import { Box, Button, Textarea, Input, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
 import { axiosFlask, axiosFlaskCluster } from "../../axios";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -6,14 +6,9 @@ import { NavLink } from "react-router-dom";
 // Chakra imports
 import { Container, Heading, Text, useColorMode } from "@chakra-ui/react";
 import {
+
   Box,
   Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Icon,
-  Input,
   InputGroup,
   InputRightElement,
   Spinner,
@@ -23,6 +18,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  ModalFooter
   ModalFooter,
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
@@ -34,6 +30,16 @@ import { useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 
+
+} from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
+import Card from "components/card/Card.js";
+import banner from "assets/img/nfts/NftBanner1.png";
+// Assets
+import { FaEthereum } from "react-icons/fa";
+import { useState } from "react";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
 const sadVideos = [
   <iframe
     width="560"
@@ -122,11 +128,7 @@ export function TeacherView() {
         </Button>
         <Text>{status}</Text>
         <Box>
-          {status === "Sad"
-            ? sadVideos.map((video) => video)
-            : status === "Happy"
-            ? happyVideos.map((video) => video)
-            : null}
+
         </Box>
       </Box>
       <Box as={"form"}>
@@ -157,12 +159,6 @@ export function TeacherView() {
               </Tr>
             </Thead>
             <Tbody>
-              {prediction?.map((data) => (
-                <Tr>
-                  <Td>{data.roll}</Td>
-                  <Td>{cluster[data.cluster]}</Td>
-                </Tr>
-              ))}
             </Tbody>
           </Table>
         </Box>
