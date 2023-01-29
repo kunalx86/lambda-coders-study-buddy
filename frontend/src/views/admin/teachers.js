@@ -6,11 +6,9 @@ import { NavLink } from "react-router-dom";
 // Chakra imports
 import { Container, Heading, Text, useColorMode } from "@chakra-ui/react";
 import {
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Icon,
+
+  Box,
+  Button,
   InputGroup,
   InputRightElement,
   Spinner,
@@ -21,6 +19,17 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter
+  ModalFooter,
+} from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
+import Card from "components/card/Card.js";
+import banner from "assets/img/nfts/NftBanner1.png";
+// Assets
+import { FaEthereum } from "react-icons/fa";
+import { useState } from "react";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
+
 
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/react";
@@ -32,24 +41,63 @@ import { useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { RiEyeCloseLine } from "react-icons/ri";
 const sadVideos = [
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/eBSeCp__xhI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/HPuD7w_TbSc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/HwLK9dBQn0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
-]
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/eBSeCp__xhI"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>,
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/HPuD7w_TbSc"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>,
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/HwLK9dBQn0g"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>,
+];
 
 const happyVideos = [
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/6QzcF3xdoF8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/vUQLEZwxk9M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
-
-]
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/6QzcF3xdoF8"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>,
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/vUQLEZwxk9M"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+  ></iframe>,
+];
 
 const cluster = [
   "",
   "Studies good, Scores good",
   "Studies good, Scores bad",
   "Studies bad, Scores good",
-  "Studies bad, Scores bad"
-]
+  "Studies bad, Scores bad",
+];
 
 export function TeacherView() {
   // const { isLoading, data } = useQuery(
@@ -80,11 +128,7 @@ export function TeacherView() {
         </Button>
         <Text>{status}</Text>
         <Box>
-          {
-            status === "Sad" ?
-              sadVideos.map(video => video) :
-              status === "Happy" ? happyVideos.map(video => video) : null
-          }
+
         </Box>
       </Box>
       <Box as={"form"}>
@@ -104,7 +148,9 @@ export function TeacherView() {
           Upload
         </Button>
         <Box>
-          {prediction?.length > 0 ? <Text>Analysis of students based on marks uploaded</Text> : null}
+          {prediction?.length > 0 ? (
+            <Text>Analysis of students based on marks uploaded</Text>
+          ) : null}
           <Table>
             <Thead>
               <Tr>
@@ -113,18 +159,12 @@ export function TeacherView() {
               </Tr>
             </Thead>
             <Tbody>
-              {prediction?.map(data => (
-                <Tr>
-                  <Td>{data.roll}</Td>
-                  <Td>{cluster[data.cluster]}</Td>
-                </Tr>
-              ))}
             </Tbody>
           </Table>
         </Box>
       </Box>
     </Box>
-  )
+  );
 }
 
 // const { roll, name, gender, isApproved } = props;
@@ -133,33 +173,33 @@ const students = [
     roll: 1,
     name: "John Marston",
     gender: "Male",
-    isApproved: true
+    isApproved: true,
   },
   {
     roll: 2,
     name: "Sadey Adler",
     gender: "Female",
-    isApproved: true
+    isApproved: true,
   },
   {
     roll: 3,
     name: "Arthur Morgan",
     gender: "Male",
-    isApproved: true
+    isApproved: true,
   },
   {
     roll: 4,
     name: "Tilly Jackson",
     gender: "Female",
-    isApproved: true
+    isApproved: true,
   },
   {
     roll: 5,
     name: "Micah Bell",
     gender: "Male",
-    isApproved: false
+    isApproved: false,
   },
-]
+];
 
 export default function Banner() {
   const textColor = "white";
@@ -175,17 +215,18 @@ export default function Banner() {
   return (
     <>
       <Flex
-        mt='100px'
-        direction='column'
+        mt="100px"
+        direction="column"
         bgImage={banner}
-        bgSize='cover'
+        bgSize="cover"
         py={{ base: "30px", md: "56px" }}
         px={{ base: "30px", md: "64px" }}
-        borderRadius='30px'>
+        borderRadius="30px"
+      >
         <Text
           fontSize={{ base: "24px", md: "34px" }}
-          color='white'
-          mb='14px'
+          color="white"
+          mb="14px"
           maxW={{
             base: "100%",
             md: "64%",
@@ -194,13 +235,14 @@ export default function Banner() {
             "2xl": "50%",
             "3xl": "42%",
           }}
-          fontWeight='700'
-          lineHeight={{ base: "32px", md: "42px" }}>
+          fontWeight="700"
+          lineHeight={{ base: "32px", md: "42px" }}
+        >
           A look at all the prolific teachers of the institute
         </Text>
         <Text
-          fontSize='md'
-          color='#E3DAFF'
+          fontSize="md"
+          color="#E3DAFF"
           maxW={{
             base: "100%",
             md: "64%",
@@ -209,22 +251,22 @@ export default function Banner() {
             "2xl": "46%",
             "3xl": "34%",
           }}
-          fontWeight='500'
-          mb='40px'
-          lineHeight='28px'>
+          fontWeight="500"
+          mb="40px"
+          lineHeight="28px"
+        >
           View the profile details of the teachers and edit/create entries..
         </Text>
       </Flex>
-      <Button mt={4} colorScheme='teal' size='md' onClick={() => setOpen(true)}>
+      <Button mt={4} colorScheme="teal" size="md" onClick={() => setOpen(true)}>
         Create Teacher
       </Button>
       {students.map(({ roll, name, gender, isApproved }) => (
-
-        <Card p='20px' bg='#EEEADE' mt='15px'>
-          <Flex direction={{ base: "column" }} justify='center'>
-            <Flex flexDirection='column' justify='space-between' h='100%'>
+        <Card p="20px" bg="#EEEADE" mt="15px">
+          <Flex direction={{ base: "column" }} justify="center">
+            <Flex flexDirection="column" justify="space-between" h="100%">
               <Flex
-                justify='space-between'
+                justify="space-between"
                 direction={{
                   base: "row",
                   md: "column",
@@ -232,10 +274,11 @@ export default function Banner() {
                   xl: "column",
                   "2xl": "row",
                 }}
-                mb='auto'>
-                <Flex direction='column'>
+                mb="auto"
+              >
+                <Flex direction="column">
                   <Text
-                    color='black'
+                    color="black"
                     fontSize={{
                       base: "xl",
                       md: "lg",
@@ -244,29 +287,32 @@ export default function Banner() {
                       "2xl": "md",
                       "3xl": "lg",
                     }}
-                    mb='5px'
-                    fontWeight='bold'
-                    me='14px'>
+                    mb="5px"
+                    fontWeight="bold"
+                    me="14px"
+                  >
                     {roll}
                   </Text>
                   <Text
-                    color='black'
+                    color="black"
                     fontSize={{
                       base: "xl",
                     }}
-                    fontWeight='bold'
-                    mb='5px'
-                    me='14px'>
+                    fontWeight="bold"
+                    mb="5px"
+                    me="14px"
+                  >
                     Name = {name}
                   </Text>
                   <Text
-                    color='black'
+                    color="black"
                     fontSize={{
                       base: "xl",
                     }}
-                    fontWeight='bold'
-                    mb='5px'
-                    me='14px'>
+                    fontWeight="bold"
+                    mb="5px"
+                    me="14px"
+                  >
                     Gender = {gender}
                   </Text>
                 </Flex>
@@ -274,8 +320,7 @@ export default function Banner() {
             </Flex>
           </Flex>
         </Card>
-      ))
-      }
+      ))}
       <br></br>
 
       <Modal isOpen={open} onClose={() => setOpen(false)}>
@@ -305,7 +350,6 @@ export default function Banner() {
                   fontWeight="500"
                   color={textColor}
                   mb="8px"
-
                 >
                   Teacher Email Id<Text color={brandStars}>*</Text>
                 </FormLabel>
@@ -328,7 +372,6 @@ export default function Banner() {
                   fontWeight="500"
                   color={textColor}
                   mb="8px"
-
                 >
                   Gender <Text color={brandStars}>*</Text>
                 </FormLabel>
@@ -352,7 +395,6 @@ export default function Banner() {
                   fontWeight="500"
                   color={textColor}
                   mb="8px"
-
                 >
                   Roll No <Text color={brandStars}>*</Text>
                 </FormLabel>
@@ -386,13 +428,12 @@ export default function Banner() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={() => setOpen(false)}>
+            <Button colorScheme="blue" mr={3} onClick={() => setOpen(false)}>
               Close
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-
     </>
   );
 }
