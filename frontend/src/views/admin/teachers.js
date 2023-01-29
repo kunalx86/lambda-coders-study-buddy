@@ -1,7 +1,36 @@
-import { Box, Button, Textarea, Text, Input, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
+import { Box, Button, Textarea, Input, Table, Thead, Tr, Th, Tbody, Td } from "@chakra-ui/react";
 import { axiosFlask, axiosFlaskCluster } from "../../axios";
-import { useState } from "react";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
+// Chakra imports
+import { Container, Heading, Text, useColorMode } from "@chakra-ui/react";
+import {
+  Checkbox,
+  Flex,
+  FormControl,
+  FormLabel,
+  Icon,
+  InputGroup,
+  InputRightElement,
+  Spinner,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter
+
+} from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
+import Card from "components/card/Card.js";
+import banner from "assets/img/nfts/NftBanner1.png";
+// Assets
+import { FaEthereum } from "react-icons/fa";
+import { useState } from "react";
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { RiEyeCloseLine } from "react-icons/ri";
 const sadVideos = [
   <iframe width="560" height="315" src="https://www.youtube.com/embed/eBSeCp__xhI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
   <iframe width="560" height="315" src="https://www.youtube.com/embed/HPuD7w_TbSc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>,
@@ -22,7 +51,7 @@ const cluster = [
   "Studies bad, Scores bad"
 ]
 
-export default function TeacherView() {
+export function TeacherView() {
   // const { isLoading, data } = useQuery(
   //   "getAllTeachers",
   //   teacherService.getAllTeachers
@@ -53,8 +82,8 @@ export default function TeacherView() {
         <Box>
           {
             status === "Sad" ?
-            sadVideos.map(video => video) :
-            status === "Happy" ? happyVideos.map(video => video) : null
+              sadVideos.map(video => video) :
+              status === "Happy" ? happyVideos.map(video => video) : null
           }
         </Box>
       </Box>
@@ -84,12 +113,12 @@ export default function TeacherView() {
               </Tr>
             </Thead>
             <Tbody>
-            {prediction?.map(data => (
-              <Tr>
-                <Td>{data.roll}</Td>
-                <Td>{cluster[data.cluster]}</Td>
-              </Tr>
-            ))}
+              {prediction?.map(data => (
+                <Tr>
+                  <Td>{data.roll}</Td>
+                  <Td>{cluster[data.cluster]}</Td>
+                </Tr>
+              ))}
             </Tbody>
           </Table>
         </Box>
@@ -97,40 +126,7 @@ export default function TeacherView() {
     </Box>
   )
 }
-import React from "react";
-import { NavLink } from "react-router-dom";
 
-// Chakra imports
-import { Container, Heading, Text, useColorMode } from "@chakra-ui/react";
-import {
-  Box,
-  Button,
-  Checkbox,
-  Flex,
-  FormControl,
-  FormLabel,
-  Icon,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Spinner,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter
-
-} from "@chakra-ui/react";
-import { Link } from "@chakra-ui/react";
-import Card from "components/card/Card.js";
-import banner from "assets/img/nfts/NftBanner1.png";
-// Assets
-import { FaEthereum } from "react-icons/fa";
-import { useState } from "react";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import { RiEyeCloseLine } from "react-icons/ri";
 // const { roll, name, gender, isApproved } = props;
 const students = [
   {
