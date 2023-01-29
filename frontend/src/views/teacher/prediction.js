@@ -123,9 +123,9 @@ export default function PredictionView() {
         <Text>{status}</Text>
         <Box>
           {status === "Sad"
-            ? sadVideos.map((video) => video)
+          ? sadVideos.map((video) => <Box m={1}>{video}</Box>)
             : status === "Happy"
-            ? happyVideos.map((video) => video)
+            ? happyVideos.map((video) => <Box m={1}>{video}</Box>)
             : null}
         </Box>
       </Box>
@@ -154,6 +154,7 @@ export default function PredictionView() {
               <Tr>
                 <Th>Roll No</Th>
                 <Th>Cluster</Th>
+                <Th>Weak Subject</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -161,6 +162,7 @@ export default function PredictionView() {
                 <Tr>
                   <Td>{data.roll}</Td>
                   <Td>{cluster[data.cluster]}</Td>
+                  <Td>{data["weak-subject"]}</Td>
                 </Tr>
               ))}
             </Tbody>

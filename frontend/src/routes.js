@@ -31,6 +31,7 @@ import AttendancePage from "views/teacher/attendance";
 import IndexPage from "views";
 import { HomeIcon } from "components/icons/Icons";
 import SportsView from "views/teacher/sports";
+import ScheduleView from "views/teacher/schedule";
 
 const routes = [
   {
@@ -116,10 +117,15 @@ const routes = [
     name: "Attendance",
     layout: "/teacher",
     path: "/attendance",
-    icon: (
-      <Icon as={MdAttachment} width="20px" height="20px" color="inherit" />
-    ),
+    icon: <Icon as={MdAttachment} width="20px" height="20px" color="inherit" />,
     component: AttendancePage,
+  },
+  {
+    name: "Schedule",
+    layout: "/teacher",
+    path: "/schedule",
+    icon: <Icon as={MdSchedule} width="20px" height="20px" color="inherit" />,
+    component: ScheduleView,
   },
   {
     name: "Student Schedule",
