@@ -58,7 +58,7 @@ export default function HomeLayout() {
             textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
-            Logo
+              Study Buddy
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
