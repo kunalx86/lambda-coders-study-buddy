@@ -11,14 +11,25 @@ import theme from "theme/theme";
 import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import IndexPage from "views";
 import { AuthProvider } from "contexts/AuthContext";
-import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import { BrowserRouter, Router } from "react-router-dom/cjs/react-router-dom.min";
 import TestPage1 from "views/student/Tests/TestPage1";
 import TestPage2 from "views/student/Tests/TestPage2";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import WeeklyTest from "views/student/Tests/WeeklyTest";
 import AptitudeTest from "views/student/Tests/AptitudeTest";
-import Community from "views/student/Community";
+import Slidebar from "views/student/community/Slidebar";
+import Coding from "views/student/community/Coding";
+import Sidebar from "components/sidebar/Sidebar";
+import Sports from "views/student/community/Sports";
+import Volunteer from "views/student/community/Volunteer";
+import Entrepreneurship from "views/student/community/Entrepreneurship";
+import Maths from "views/student/recommendation/Maths";
+import RecomSidebar from "views/student/recommendation/RecomSlidebar";
+import English from "views/student/recommendation/English";
+import Science from "views/student/recommendation/Science";
+import Geography from "views/student/recommendation/Geography";
+import History from "views/student/recommendation/History";
 
 const queryClient = new QueryClient();
 
@@ -53,8 +64,19 @@ ReactDOM.render(
                 <Route exact path={`/student/aptituderesult`} component={AptitudeResult} />
                 <Route exact path={"/student/test1"} component={WeeklyTest} />
                 <Route exact path={`/student/test2`} component={AptitudeTest} />
-                <Route exact path={'/student/community'} component={Community} />
+                <Route exact path={'/student/community'} component={Slidebar} />
+                <Route exact path={"/student/coding"} component={Coding} />
+                <Route exact path={"/student/sports"} component={Sports} />
+                <Route exact path={"/student/volunteer"} component={Volunteer} />
+                <Route exact path={"/student/entrepreneurship"} component={Entrepreneurship} />
+                <Route exact path={"/student/Recommendations"} component={RecomSidebar} />
+                <Route exact path={"/student/Maths"} component={Maths} />
+                <Route exact path={"/student/English"} component={English} />
+                <Route exact path={"/student/History"} component={History} />
+                <Route exact path={"/student/Science"} component={Science} />
+                <Route exact path={"/student/Geography"} component={Geography} />
               </Switch>
+
             </BrowserRouter>
           </ThemeEditorProvider>
         </AuthProvider>
