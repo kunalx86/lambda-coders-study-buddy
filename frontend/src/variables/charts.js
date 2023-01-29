@@ -107,16 +107,20 @@ export const barChartOptionsDailyTraffic = {
 
 export const barChartDataConsumption = [
   {
-    name: "PRODUCT A",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "English",
+    data: [18, 22, 23, 28, 27],
   },
   {
-    name: "PRODUCT B",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Marathi",
+    data: [21, 26, 23, 28, 29],
   },
   {
-    name: "PRODUCT C",
-    data: [400, 370, 330, 390, 320, 350, 360, 320, 380],
+    name: "Hindi",
+    data: [22, 25, 28, 28, 37],
+  },
+  {
+    name: "History",
+    data: [18, 24, 25, 28, 30],
   },
 ];
 
@@ -141,7 +145,7 @@ export const barChartOptionsConsumption = {
     theme: "dark",
   },
   xaxis: {
-    categories: ["17", "18", "19", "20", "21", "22", "23", "24", "25"],
+    categories: ["Jan 1st Week", "Jan 2nd Week", "Jan 3rd Week", "Jan 4th Week", "Feb 1st Week"],
     show: false,
     labels: {
       show: true,
@@ -209,8 +213,8 @@ export const barChartOptionsConsumption = {
 };
 
 export const pieChartOptions = {
-  labels: ["Your files", "System", "Empty"],
-  colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+  labels: ["Cluster 1", "Cluster 2", "Cluster 3", "Cluster 4"],
+  colors: ["#4318FF", "#6AD2FF", "#EFF4FB", "#03fcdb"],
   chart: {
     width: "50px",
   },
@@ -239,7 +243,7 @@ export const pieChartOptions = {
     },
   },
   fill: {
-    colors: ["#4318FF", "#6AD2FF", "#EFF4FB"],
+    colors: ["#4318FF", "#6AD2FF", "#28fc03", "#03fcdb"],
   },
   tooltip: {
     enabled: true,
@@ -247,18 +251,26 @@ export const pieChartOptions = {
   },
 };
 
-export const pieChartData = [63, 25, 12];
+export const pieChartData = [63, 25, 12, 45];
 
 // Total Spent Default
 
 export const lineChartDataTotalSpent = [
   {
-    name: "Revenue",
-    data: [50, 64, 48, 66, 49, 68],
+    name: "Attendance for Subject English",
+    data: [80, 83, 74, 66, 75, 85],
   },
   {
-    name: "Profit",
-    data: [30, 40, 24, 46, 20, 46],
+    name: "Attendance for Subject Marathi",
+    data: [76, 80, 92, 98, 89, 79],
+  },
+  {
+    name: "Attendance for Subject Hindi",
+    data: [78, 85, 83, 82, 89, 79],
+  },
+  {
+    name: "Attendance for Subject History",
+    data: [90, 92, 76, 87, 88, 91],
   },
 ];
 
@@ -276,7 +288,7 @@ export const lineChartOptionsTotalSpent = {
       color: "#4318FF",
     },
   },
-  colors: ["#4318FF", "#39B8FF"],
+  colors: ["#4318FF", "#39B8FF", "#33cf04",  "#04cf88"],
   markers: {
     size: 0,
     colors: "white",
