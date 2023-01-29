@@ -41,7 +41,7 @@ export default function HeaderLinks(props) {
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.18)',
 		'14px 17px 40px 4px rgba(112, 144, 176, 0.06)'
 	);
-  const { user } = useAuth();
+	const { user } = useAuth();
 	return (
 		<Flex
 			w={{ sm: '100%', md: 'auto' }}
@@ -61,16 +61,6 @@ export default function HeaderLinks(props) {
 				p="6px"
 				align="center"
 				me="6px">
-				<Flex align="center" justify="center" bg={ethBox} h="29px" w="29px" borderRadius="30px" me="7px">
-					<Icon color={ethColor} w="9px" h="14px" as={FaEthereum} />
-				</Flex>
-				<Text w="max-content" color={ethColor} fontSize="sm" fontWeight="700" me="6px">
-					1,924
-					<Text as="span" display={{ base: 'none', md: 'unset' }}>
-						{' '}
-						ETH
-					</Text>
-				</Text>
 			</Flex>
 			<SidebarResponsive routes={routes} />
 			<Menu>

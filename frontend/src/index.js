@@ -12,6 +12,7 @@ import { ThemeEditorProvider } from "@hypertheme-editor/chakra-ui";
 import IndexPage from "views";
 import { AuthProvider } from "contexts/AuthContext";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
+import TestPage from "views/student/Tests/TestPage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
