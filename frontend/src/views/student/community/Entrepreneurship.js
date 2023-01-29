@@ -20,20 +20,14 @@ import { StarIcon } from '@chakra-ui/icons';
 import { SimpleGrid } from '@chakra-ui/react'
 
 
-import {
-    FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
-} from 'react-icons/fi';
+
 
 import { FcSportsMode } from "react-icons/fc"
 import { MdVolunteerActivism, MdOutlineComputer } from "react-icons/md"
 import { FaBusinessTime } from "react-icons/fa";
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
+import Sidebar from './Slidebar';
 
 
 const LinkItems = [
@@ -43,8 +37,10 @@ const LinkItems = [
     { name: 'Entrepreneurship', icon: FaBusinessTime },
 ];
 
-export default function Community({ children }) {
 
+
+
+const Entrepreneurship = () => {
     const post = [{
         imageUrl: 'https://www.itprotoday.com/sites/itprotoday.com/files/styles/article_featured_retina/public/programming%20evolution.jpg?itok=WTj9-yNz',
         imageAlt: 'Rear view of modern home with pool',
@@ -55,12 +51,15 @@ export default function Community({ children }) {
         imageAlt: '',
         title: 'New Coding Challenge',
         content: 'I solved a data structure problem on arrays and stacks',
+        tag: "Coding"
     },
     {
         imageUrl: 'https://media.istockphoto.com/id/1224500457/photo/programming-code-abstract-technology-background-of-software-developer-and-computer-script.jpg?s=612x612&w=0&k=20&c=nHMypkMTU1HUUW85Zt0Ff7MDbq17n0eVeXaoM9Knt4Q=',
         imageAlt: 'New Language',
         title: 'New Language',
         content: 'I learned the new language called Python',
+        tag: "Coding"
+
     },
 
 
@@ -69,6 +68,7 @@ export default function Community({ children }) {
         imageAlt: 'New Language',
         title: 'New Idea',
         content: 'I have a new business idea',
+        tag: "entrepreneurship"
     },
 
 
@@ -77,6 +77,8 @@ export default function Community({ children }) {
         imageAlt: 'Business',
         title: 'Businss Meetup',
         content: 'Lets talk about the new business revolutions',
+        tag: "entrepreneurship"
+
     },
 
     {
@@ -84,6 +86,8 @@ export default function Community({ children }) {
         imageAlt: 'Volunteer',
         title: 'Beach Cleanup',
         content: 'Beach cleanup drive on this weekend',
+        tag: "volunteer"
+
     },
 
     {
@@ -91,34 +95,18 @@ export default function Community({ children }) {
         imageAlt: 'Sports',
         title: 'Football Match',
         content: 'Football match in between divisions is soon to take place',
+        tag: "sports"
+
     },
     ]
-    const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <>
-            <Box minH="500vh" bg={useColorModeValue('gray.100', 'gray.900')}>
-                <SidebarContent
-                    onClose={() => onClose}
-                    display={{ base: 'none', md: 'block' }}
-                />
-                <Drawer
-                    autoFocus={false}
-                    isOpen={isOpen}
-                    placement="left"
-                    onClose={onClose}
-                    returnFocusOnClose={false}
-                    onOverlayClick={onClose}
-                    size="full">
-                    <DrawerContent>
-                        <SidebarContent onClose={onClose} />
-                    </DrawerContent>
-                </Drawer>
-                {/* mobilenav */}
-                <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
-                <SimpleGrid columns={3}>
-                    {
-                        post.map((_post) => (
-                            <>
+            <Sidebar />
+            <SimpleGrid columns={3}>
+                {
+                    post.map((_post) => (
+                        <>
+                            {_post.tag === "entrepreneurship" ? (
                                 <Box ml={{ base: 0, md: 60 }} p="4">
                                     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
                                         <Image src={_post.imageUrl} alt={post.imageAlt} />
@@ -149,15 +137,13 @@ export default function Community({ children }) {
                                     </Box>
 
                                 </Box>
-                            </>
-                        ))
-                    }
-                </SimpleGrid>
+                            ) : ""}
 
-            </Box>
-            <Box minH='100vh'>
-                Community
-            </Box>
+                        </>
+                    ))
+                }
+            </SimpleGrid>
+
         </>
 
     );
@@ -165,96 +151,4 @@ export default function Community({ children }) {
 
 
 
-const SidebarContent = ({ onClose, ...rest }) => {
-    return (
-        <Box
-            bg={useColorModeValue('white', 'gray.900')}
-            borderRight="1px"
-            borderRightColor={useColorModeValue('gray.200', 'gray.700')}
-            w={{ base: 'full', md: 60 }}
-            pos="fixed"
-            h="full"
-            {...rest}>
-            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-                    Communities
-                </Text>
-                <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
-            </Flex>
-            {LinkItems.map((link) => (
-                <NavItem key={link.name} link={link.name} icon={link.icon} style={{ color: "white" }} >
-                    {link.name}
-                </NavItem>
-            ))}
-        </Box>
-    );
-};
-
-
-const NavItem = ({ icon, children, link, ...rest }) => {
-    const [current, setCurrent] = useState();
-    const setSelectedItem = (e) => {
-        console.log(e)
-        setCurrent(e)
-    }
-
-    return (
-        <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} onClick={() => setSelectedItem(link)}>
-            <Flex
-                align="center"
-                p="4"
-                mx="4"
-                borderRadius="lg"
-                role="group"
-                cursor="pointer"
-                _hover={{
-                    bg: 'cyan.400',
-                    color: 'white',
-                }}
-                style={{
-                    backgroundColor: current === link ? 'cyan.400' : "",
-                    color: current === link ? "white" : ""
-                }}
-                {...rest}>
-                {icon && (
-                    <Icon
-                        mr="4"
-                        fontSize="16"
-                        _groupHover={{
-                            color: 'white',
-                        }}
-                        as={icon}
-                    />
-                )}
-                {children}
-            </Flex>
-        </Link>
-    );
-};
-
-
-const MobileNav = ({ onOpen, ...rest }) => {
-    return (
-        <Flex
-            ml={{ base: 0, md: 60 }}
-            px={{ base: 4, md: 24 }}
-            height="20"
-            alignItems="center"
-            bg={useColorModeValue('white', 'gray.900')}
-            borderBottomWidth="1px"
-            borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-            justifyContent="flex-start"
-            {...rest}>
-            <IconButton
-                variant="outline"
-                onClick={onOpen}
-                aria-label="open menu"
-                icon={<FiMenu />}
-            />
-
-            <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-                Communities
-            </Text>
-        </Flex>
-    );
-};
+export default Entrepreneurship;
