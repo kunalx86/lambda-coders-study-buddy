@@ -8,10 +8,10 @@ exports.login = (req, res) => {
         if (password === process.env.ADMIN_PASS) {
             const access_token = jwt.sign(
                 { email: email, type: "admin" },
-                api_key.accessToken,
+                process.env.ACCESS_TOKEN_SECRET,
                 {
                     algorithm: "HS256",
-                    expiresIn: api_key.accessTokenLife,
+                    expiresIn: process.env.ACCESS_TOKEN_LIFE,
                 }
             );
             return res.status(201).json({

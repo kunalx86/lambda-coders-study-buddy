@@ -20,7 +20,7 @@ const classSchema = new mongoose.Schema({
     required: true
   },
   subjects: [{
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
     ref: "subject"
   }]

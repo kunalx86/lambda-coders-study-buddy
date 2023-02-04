@@ -46,13 +46,6 @@ app.use(communityRoutes);
 
 
 
-// Error handler
-app.use((err, req, res, next) => {
-  logger.err(err, true);
-  return res.status(500).json({
-    error: err.message,
-  });
-});
 
 const PORT = process.env.PORT || 5000;
 mongoose
