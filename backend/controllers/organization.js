@@ -1,9 +1,10 @@
 const { Teacher } = require("../models/Teacher");
-const { Class } = require("../models/Class");
+const { Class } = require("../models/Class.js");
 const { Teaches } = require("../models/Teaches");
 const { Subject } = require("../models/Subject");
-const {Student} = require("../models/Student");
+const { Student } = require("../models/Student");
 const bcrypt = require("bcryptjs");
+
 
 
 
@@ -11,7 +12,7 @@ exports.createTeacher = (req, res) => {
     try {
         const name = req.body.name;
         const email = req.body.email;
-        
+
         Teacher.findOne({ email: email }).then((_teacher) => {
             if (!_teacher) {
                 bcrypt
@@ -50,13 +51,13 @@ exports.createTeacher = (req, res) => {
     }
 }
 
-exports.createClass = (req, res) => {
-
+exports.createClass = async (req, res) => {
+    console.log(req.body)
     try {
         const { grade } = req.body;
         const { name } = req.body;
-        // const { classTeacher } = req.body;
-        // const { subjects } = req.body;
+        const { classTeacher } = req.body;
+        const { subjects } = req.body;
 
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
@@ -77,20 +78,25 @@ exports.createClass = (req, res) => {
             code = '';
             const charactersLength = characters.length;
             for (let i = 0; i < 5; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                code += characters.charAt(Math.floor(Math.random() * charactersLength));
             }
-            Class.findOne({ joiningCode: code }).then((_class) => {
-                if (_class) {
+            await Class.findOne({ 'joiningCode': code }, (err, result) => {
+
+                console.log(result)
+                if (result) {
                     flag = true;
                 } else {
                     flag = false;
                 }
+            }).then((result) => {
             })
         }
         const NewClass = new Class({
             grade,
             name,
-            joiningCode: code
+            joiningCode: code,
+            classTeacher,
+            subjects
         })
         NewClass.save();
         return res.status(203).json({
@@ -272,18 +278,18 @@ exports.getAllClass = (req, res) => {
 }
 
 
-exports.getStudentsByClass = (req , res) => {
+exports.getStudentsByClass = (req, res) => {
     try {
-        const { grade } =req.params;
-        Class.findOne({grade}).then((_class) => {
+        const { grade } = req.params;
+        Class.findOne({ grade }).then((_class) => {
             var code = _class.joiningCode;
-            Student.find({code}).then((_students) =>{
+            Student.find({ code }).then((_students) => {
                 return res.status(203).json({
                     data: _students
                 })
             })
         })
-        
+
     } catch (err) {
         (err) => {
             if (!err.statusCode) {
@@ -291,6 +297,6 @@ exports.getStudentsByClass = (req , res) => {
             }
             next(err);
         };
-        
+
     }
 }   

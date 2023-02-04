@@ -21,6 +21,7 @@ exports.signup = (req, res) => {
     const gender = req.body.gender;
     // const confirmPassword=req.body.confirmPassword;
     const name = req.body.name;
+    const rollno = req.body.rollno;
 
     let otp = null;
     // let tokenGenerated=null;
@@ -48,44 +49,18 @@ exports.signup = (req, res) => {
                                 email: email,
                                 password: hashedPassword,
                                 gender: gender,
-                                isverified: false,
                                 name: name,
-                                resetVerified: false,
                                 class: _class._id,
-                                code
+                                code,
+                                rollno
 
                             });
                             Newuser.save();
                             console.log("details saved in the database");
+                            res.status(203).json(Newuser);
 
-                            otp = Math.floor(100000 + Math.random() * 900000);
 
-                            const OTP = new Otp({
-                                otp: otp,
-                                email: email,
-                            });
-
-                            OTP.save();
-                            console.log(otp);
-                            res.status(201).json({ message: "OTP sent to your Email" });
                         })
-                        .then((res) => {
-                            var mailOptions = {
-                                from: 'pateljay5430@gmail.com',
-                                to: email,
-                                subject: 'OTP Verification',
-                                html: ` '<h1>Please Verify your account using this OTP: !</h1>
-                <p>OTP:${otp}</p>'`
-                            };
-
-                            transporter.sendMail(mailOptions, function (error, info) {
-                                if (error) {
-                                    console.log(error);
-                                } else {
-                                    console.log('Email sent: ' + info.response);
-                                }
-                            });
-                        });
 
                 } else {
                     const error = new Error("Please enter valid joining code"); // User already exist
@@ -246,98 +221,42 @@ exports.login = (req, res, next) => {
 
 
     Student.findOne({ email: email }).then((user) => {
-        if (user.isverified == false) {
-            console.log("user isn't verified");
+        bcrypt
+            .compare(password, user.password)
+            .then((matchPass) => {
+                if (matchPass) {
+                    const access_token = jwt.sign(
+                        { email: email, type: "student" },
+                        process.env.ACCESS_TOKEN_SECRET,
+                        {
+                            algorithm: "HS256",
+                            expiresIn: process.env.ACCESS_TOKEN_LIFE,
+                        }
+                    );
 
-            var otp = Math.floor(100000 + Math.random() * 900000);
-            console.log("otp =", otp);
-            Otp.findOne({ email: email }).then((user) => {
-                // if the otp record is deleted
-                if (!user) {
-                    const OTP = new Otp({
-                        otp: otp,
-                        email: email,
-                    });
 
-                    OTP.save().then(() => {
-                        var mailOptions = {
-                            from: 'pateljay5430@gmail.com',
-                            to: email,
-                            subject: 'OTP Verification',
-                            html: ` '<h1>Please Verify your account using this OTP: !</h1>
-                <p>OTP:${otp}</p>'`
-                        };
 
-                        transporter.sendMail(mailOptions, function (error, info) {
-                            if (error) {
-                                console.log(error);
-                            } else {
-                                console.log('Email sent: ' + info.response);
-                            }
-                        });
-                        return res.status(422).json({
-                            message:
-                                " you have not verified your otp, new otp has been sent to your email THANK YOU!",
-                            redirect: true,
-                        });
+                    return res.status(201).json({
+                        message: "User logged in!",
+                        access_token: access_token,
+                        username: user.name,
+                        userId: user._id,
                     });
                 } else {
-                    user.otp = otp;
-                    user.save().then(() => {
-                        transporter.sendMail({
-                            to: email,
-                            from: "krishdj096@gmail.com",
-                            subject: "OTP Verification",
-                            html: ` '<h1>Please Verify your account using this OTP: !</h1>
-                                        <p>OTP:${otp}</p>'`,
-                        });
-
-                        console.log("mail sent");
-                        return res.status(422).json({
-                            message:
-                                " you have not verified your otp, new otp has been sent to your email THANK YOU!",
-                            redirect: true,
-                        });
-                    });
+                    return res.status(401).json({ message: "password don't match" });
                 }
-            });
-        } else {
-            bcrypt
-                .compare(password, user.password)
-                .then((matchPass) => {
-                    if (matchPass) {
-                        const access_token = jwt.sign(
-                            { email: email, type: "student", id: user._id },
-                            api_key.accessToken,
-                            {
-                                algorithm: "HS256",
-                                expiresIn: api_key.accessTokenLife,
-                            }
-                        );
+            })
 
-
-
-                        return res.status(201).json({
-                            message: "User logged in!",
-                            access_token: access_token,
-                            username: user.name,
-                            userId: user._id,
-                        });
-                    } else {
-                        return res.status(401).json({ message: "password don't match" });
+            .catch((err) => {
+                (err) => {
+                    if (!err.statusCode) {
+                        err.statusCode = 500;
                     }
-                })
-
-                .catch((err) => {
-                    (err) => {
-                        if (!err.statusCode) {
-                            err.statusCode = 500;
-                        }
-                        next(err);
-                    };
-                });
-        }
-    });
+                    next(err);
+                };
+            });
+    }
+    );
 };
 
 exports.resetPassword = (req, res, next) => {
